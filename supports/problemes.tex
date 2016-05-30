@@ -1,0 +1,399 @@
+\documentclass[a4paper]{article}
+
+%\usepackage[landscape]{geometry}
+\usepackage[francais]{babel}
+\usepackage{t1enc}
+\usepackage[utf8]{inputenc}
+\usepackage{fullpage}
+\usepackage{multido}
+\usepackage{graphicx}
+\graphicspath{{Planche/}}
+\usepackage{array}
+\usepackage{color}
+%\definecolor{light-gray}{gray}{0.90}
+%\arrayrulecolor{light-gray}
+% \arrayrulewidth{.5pt}
+
+\usepackage{enumitem}
+
+\setlength{\textwidth}{18cm}
+\setlength{\oddsidemargin}{-1.8cm} 
+\setlength{\topmargin}{-10mm} 
+\setlength{\textheight}{27.8cm}
+\renewcommand{\arraystretch}{0}
+%\setlength{\tabcolsep}{0cm}
+
+\usepackage{pict2e}
+
+\definecolor{darkgray}{gray}{0.25}
+
+%% General shape of the cups HERE
+
+\setlength{\unitlength}{1mm}
+\newsavebox{\gob}
+\savebox{\gob}(20,20){%
+  {\color{darkgray}\polygon*(0,0)(20,0)(15,20)(5,20)}%
+  \linethickness{1pt}\polygon(0,0)(20,0)(15,20)(5,20)
+}
+\newsavebox{\gobjaune}
+\savebox{\gobjaune}(20,20){%
+  {\color{yellow}\polygon*(0,0)(20,0)(15,20)(5,20)}%
+  \linethickness{1pt}\polygon(0,0)(20,0)(15,20)(5,20)
+}
+\newsavebox{\gobinv}
+\savebox{\gobinv}(20,20){%
+  {\color{darkgray}\polygon*(5,0)(15,0)(20,20)(0,20)}%
+  \linethickness{1pt}\polygon(5,0)(15,0)(20,20)(0,20)
+}
+\newsavebox{\grue}
+\savebox{\grue}(20,5){%
+  \linethickness{0.7mm}%
+  \line(0,1){5}%
+  \put(0,5){\line(1,0){20}}%
+  \put(20,5){\line(0,-1){5}}%
+}
+
+
+\newcommand{\comment}[1]{}
+
+\begin{document}
+
+\thispagestyle{empty}
+
+\section*{Démo}
+
+%% Situation definition :
+% Cups are 20 units wide
+% To be stacked they should be drawn with a 10 units shift up
+% Obviously the last cup drawn appears on top of the others, so
+% drawing order should comply with stacking order
+
+\begin{tabular}{|c|c|c|}
+\cline{1-1}\cline{3-3}
+\begin{picture}(80,40)(10,10)
+\multiput(20,0)(20,0){2}{\usebox{\gob}}
+\put(20,10){\usebox{\gob}}
+\put(20,40){\usebox{\grue}}
+\end{picture}
+&
+\begin{minipage}[b]{1cm}
+  ~\Huge $\Rightarrow$~
+\vspace{2cm}
+\end{minipage}
+&
+\begin{picture}(80,40)(10,10)
+\multiput(20,0)(20,0){2}{\usebox{\gob}}
+\put(40,10){\usebox{\gob}}
+\end{picture}
+\\
+\cline{1-1}\cline{3-3}
+\end{tabular}
+
+%\hfill
+\subsection*{Une solution :}
+\begin{tabular}{c@{~}*{10}{c@{\,}}}
+\includegraphics[width=10mm]{f0}
+&
+\begin{tabular}[b]{@{}c@{}}
+\includegraphics[width=10mm]{graycond}\\
+\includegraphics[width=10mm]{down}
+\end{tabular}
+&
+\begin{tabular}[b]{@{}c@{}}
+\includegraphics[width=10mm]{graycond}\\
+\includegraphics[width=10mm]{right}
+\end{tabular}
+&
+\begin{tabular}[b]{@{}c@{}}
+\includegraphics[width=10mm]{graycond}\\
+\includegraphics[width=10mm]{right}
+\end{tabular}
+&
+\begin{tabular}[b]{@{}c@{}}
+\includegraphics[width=10mm]{graycond}\\
+\includegraphics[width=10mm]{down}
+\end{tabular}
+&&&&&&\\[5mm]
+\end{tabular}
+%\hfill
+
+\vspace*{7mm}
+\section*{Transporteur}
+
+\begin{tabular}{|c|c|c|}
+\cline{1-1}\cline{3-3}
+\begin{picture}(80,40)(10,10)
+\multiput(0,0)(20,0){4}{\usebox{\gob}}
+\put(0,10){\usebox{\gob}}
+\put(0,40){\usebox{\grue}}
+\end{picture}
+&
+\begin{minipage}[b]{1cm}
+  ~\Huge $\Rightarrow$~
+\vspace{2cm}
+\end{minipage}
+&
+\begin{picture}(80,40)(10,10)
+\multiput(0,0)(20,0){4}{\usebox{\gob}}
+\put(60,10){\usebox{\gob}}
+\end{picture}
+\\
+\cline{1-1}\cline{3-3}
+\end{tabular}
+
+\vspace*{7mm}
+
+\section*{Pyramide}
+
+\begin{tabular}{|c|c|c|}
+\cline{1-1}\cline{3-3}
+\begin{picture}(80,50)(10,10)
+\multiput(20,0)(0,10){3}{\usebox{\gob}}
+\put(20,50){\usebox{\grue}}
+\end{picture}
+&
+\begin{minipage}[b]{1cm}
+  ~\Huge $\Rightarrow$~
+\vspace{2cm}
+\end{minipage}
+&
+\begin{picture}(80,50)(10,10)
+\multiput(20,0)(20,0){2}{\usebox{\gob}}
+\put(30,20){\usebox{\gob}}
+\end{picture}
+\\
+\cline{1-1}\cline{3-3}
+\end{tabular}
+
+\vspace*{7mm}
+
+\section*{Échange}
+
+\begin{tabular}{|c|c|c|}
+\cline{1-1}\cline{3-3}
+\begin{picture}(80,40)(10,10)
+\put(20,0){\usebox{\gob}}
+\put(40,0){\usebox{\gobinv}}
+\put(20,40){\usebox{\grue}}
+\end{picture}
+&
+\begin{minipage}[b]{1cm}
+  ~\Huge $\Rightarrow$~
+\vspace{2cm}
+\end{minipage}
+&
+\begin{picture}(80,40)(10,10)
+\put(20,0){\usebox{\gobinv}}
+\put(40,0){\usebox{\gob}}
+\end{picture}
+\\
+\cline{1-1}\cline{3-3}
+\end{tabular}
+
+\newpage
+\section*{Demi-tours}
+
+\begin{tabular}{|c|c|c|}
+\cline{1-1}\cline{3-3}
+\begin{picture}(80,50)(10,10)
+\multiput(0,0)(20,0){4}{\multiput(0,0)(0,10){2}{\usebox{\gob}}}
+\put(0,50){\usebox{\grue}}
+\end{picture}
+&
+\begin{minipage}[b]{1cm}
+  ~\Huge $\Rightarrow$~
+\vspace{2cm}
+\end{minipage}
+&
+\begin{picture}(80,50)(10,10)
+\multiput(0,0)(20,0){4}{\usebox{\gob}}
+\multiput(0,20)(20,0){4}{\usebox{\gobinv}}
+\end{picture}
+\\
+\cline{1-1}\cline{3-3}
+\end{tabular}
+
+\vspace*{15mm}
+
+\section*{Dichotomie}
+
+\begin{tabular}{|c|c|c|}
+\cline{1-1}\cline{3-3}
+\begin{picture}(80,60)(10,10)
+\multiput(20,0)(0,10){4}{\usebox{\gob}}
+\put(20,60){\usebox{\grue}}
+\end{picture}
+&
+\begin{minipage}[b]{1cm}
+  ~\Huge $\Rightarrow$~
+\vspace{3cm}
+\end{minipage}
+&
+\begin{picture}(80,60)(10,10)
+\multiput(0,0)(0,10){2}{\usebox{\gob}}
+\multiput(40,0)(0,10){2}{\usebox{\gob}}
+\end{picture}
+\\
+\cline{1-1}\cline{3-3}
+\end{tabular}
+
+\vspace*{15mm}
+
+\section*{Transporteur lourd}
+
+\begin{tabular}{|c|c|c|}
+\cline{1-1}\cline{3-3}
+\begin{picture}(80,80)(10,10)
+\multiput(20,0)(0,10){6}{\usebox{\gob}}
+\put(20,80){\usebox{\grue}}
+\end{picture}
+&
+\begin{minipage}[b]{1cm}
+  ~\Huge $\Rightarrow$~
+\vspace{4cm}
+\end{minipage}
+&
+\begin{picture}(80,80)(10,10)
+\multiput(40,0)(0,10){6}{\usebox{\gob}}
+\end{picture}
+\\
+\cline{1-1}\cline{3-3}
+\end{tabular}
+
+\newpage
+
+\section*{Intrus}
+
+\subsection*{Voici un programme avec une étiquette de couleur sur une instruction :}
+
+\begin{tabular}{c@{~}*{10}{c@{\,}}}
+\includegraphics[width=10mm]{f0}
+&
+\begin{tabular}[b]{@{}c@{}}
+\includegraphics[width=10mm]{graycond}\\
+\includegraphics[width=10mm]{down}
+\end{tabular}
+&
+\begin{tabular}[b]{@{}c@{}}
+\includegraphics[width=10mm]{yellow}\\
+\includegraphics[width=10mm]{right}
+\end{tabular}
+&
+\begin{tabular}[b]{@{}c@{}}
+\includegraphics[width=10mm]{yellow}\\
+\includegraphics[width=10mm]{right}
+\end{tabular}
+&
+\begin{tabular}[b]{@{}c@{}}
+\includegraphics[width=10mm]{graycond}\\
+\includegraphics[width=10mm]{down}
+\end{tabular}
+&
+\begin{tabular}[b]{@{}c@{}}
+\includegraphics[width=10mm]{graycond}\\
+\includegraphics[width=10mm]{right}
+\end{tabular}
+&
+\begin{tabular}[b]{@{}c@{}}
+\includegraphics[width=10mm]{graycond}\\
+\includegraphics[width=10mm]{right}
+\end{tabular}
+&
+\begin{tabular}[b]{@{}c@{}}
+\includegraphics[width=10mm]{graycond}\\
+\includegraphics[width=10mm]{f0}
+\end{tabular}
+&&&\\[5mm]
+\end{tabular}
+
+\subsection*{Où que soit le gobelet jaune, le programme le décale d'un cran à droite :}
+
+\begin{tabular}{|c|c|c|}
+\cline{1-1}\cline{3-3}
+\begin{picture}(80,40)(10,10)
+\put(0,0){\usebox{\gob}}
+\put(20,0){\usebox{\gobjaune}}
+\multiput(40,0)(20,0){2}{\usebox{\gob}}
+\put(0,40){\usebox{\grue}}
+\end{picture}
+&
+\begin{minipage}[b]{1cm}
+  ~\Huge $\Rightarrow$~
+\vspace{2cm}
+\end{minipage}
+&
+\begin{picture}(80,40)(10,10)
+\put(0,0){\usebox{\gob}}
+\multiput(40,0)(20,0){2}{\usebox{\gob}}
+\put(40,10){\usebox{\gobjaune}}
+\end{picture}
+\\
+\cline{1-1}\cline{3-3}
+\end{tabular}
+
+\vspace*{7mm}
+
+\section*{Chromatomie}
+
+\begin{tabular}{|c|c|c|}
+\cline{1-1}\cline{3-3}
+\begin{picture}(80,70)(10,10)
+\put(20,0){\usebox{\gob}}
+\put(20,10){\usebox{\gobjaune}}
+\put(20,20){\usebox{\gob}}
+\put(20,30){\usebox{\gobjaune}}
+\put(20,40){\usebox{\gobjaune}}
+\put(20,70){\usebox{\grue}}
+\end{picture}
+&
+\begin{minipage}[b]{1cm}
+  ~\Huge $\Rightarrow$~
+\vspace{3.5cm}
+\end{minipage}
+&
+\begin{picture}(80,70)(10,10)
+\multiput(0,0)(0,10){2}{\usebox{\gob}}
+\multiput(40,0)(0,10){3}{\usebox{\gobjaune}}
+\end{picture}
+\\
+\cline{1-1}\cline{3-3}
+\end{tabular}
+
+
+\vspace*{7mm}
+
+\section*{Translation}
+
+\begin{tabular}{|c|c|c|}
+\cline{1-1}\cline{3-3}
+\begin{picture}(80,50)(10,10)
+\multiput(20,0)(0,10){3}{\usebox{\gob}}
+\multiput(60,0)(0,10){2}{\usebox{\gob}}
+\put(0,50){\usebox{\grue}}
+\end{picture}
+&
+\begin{minipage}[b]{1cm}
+  ~\Huge $\Rightarrow$~
+\vspace{2cm}
+\end{minipage}
+&
+\begin{picture}(80,50)(10,10)
+\multiput(0,0)(0,10){3}{\usebox{\gob}}
+\multiput(40,0)(0,10){2}{\usebox{\gob}}
+\end{picture}
+\\
+\cline{1-1}\cline{3-3}
+\end{tabular}
+
+
+%% \includegraphics[width=20mm]{left}
+%% \includegraphics[width=20mm]{right}
+%% \includegraphics[width=20mm]{down}
+%% \includegraphics[width=20mm]{rewind}
+%% \includegraphics[width=20mm]{f0}
+%% \includegraphics[width=20mm]{yellow}
+%% \includegraphics[width=20mm]{none}
+%% \includegraphics[width=20mm]{any}
+
+
+\end{document}

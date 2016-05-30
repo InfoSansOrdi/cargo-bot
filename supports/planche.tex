@@ -1,0 +1,221 @@
+\documentclass[a4paper]{article}
+
+\usepackage[a3paper,landscape]{geometry}
+\usepackage[francais]{babel}
+\usepackage{t1enc}
+\usepackage[utf8]{inputenc}
+\usepackage{fullpage}
+\usepackage{multido}
+\usepackage{graphicx}
+\usepackage{colortbl}
+\definecolor{light-gray}{gray}{0.90}
+\arrayrulecolor{light-gray}
+% \arrayrulewidth{.5pt}
+
+\usepackage{enumitem}
+
+\setlength{\textwidth}{39cm}
+\setlength{\oddsidemargin}{-1.5cm} 
+\setlength{\topmargin}{-15mm} 
+\setlength{\textheight}{27.8cm}
+\renewcommand{\arraystretch}{0}
+\setlength{\tabcolsep}{0cm}
+
+\usepackage{pict2e}
+
+\newcommand{\comment}[1]{}
+
+\begin{document}
+
+
+\thispagestyle{empty}
+
+\setlength{\unitlength}{1cm}
+
+%% Change the geometry for the cups HERE
+
+\begin{picture}(39,8.8)
+  \multiput(6,4.8)(3.85,0){8}{
+    \circle{7.7}
+  }
+\end{picture}
+
+\begin{minipage}{6cm}
+\vspace{-0.6cm}
+  \begin{center}
+    {\Huge\sc Cargo-Bot}
+  \end{center}
+\vspace{-0.4cm}
+
+\subsection*{Présentation et but du jeu}
+\vspace{-0.2cm}
+
+Ce jeu consiste \`a programmer une grue (jouée par un participant) qui
+manipule des gobelets de couleurs
+diff\'erentes.
+
+Pour cela, vous
+placerez des
+  instructions (\includegraphics[height=\baselineskip]{left} 
+\includegraphics[height=\baselineskip]{right} 
+\includegraphics[height=\baselineskip]{down} 
+\includegraphics[height=\baselineskip]{f0} 
+\includegraphics[height=\baselineskip]{f1}
+\includegraphics[height=\baselineskip]{f2} 
+\includegraphics[height=\baselineskip]{f3}
+\includegraphics[height=\baselineskip]{rewind}
+\reflectbox{\includegraphics[height=\baselineskip]{rewind}}
+) dans la zone de programme ci-contre.
+
+Chaque problème décrit une position de
+départ des gobelets et de la grue, ainsi qu'un but à atteindre.
+
+\textbf{Dès que les gobelets sont dans
+  cette position, c'est gagné !}
+
+\vspace{-0.2cm}
+
+
+\subsection*{Déplacements}
+\vspace{-0.2cm}
+
+\includegraphics[height=\baselineskip]{left} et 
+\includegraphics[height=\baselineskip]{right} d\'eplacent la grue
+% à droite ou à gauche 
+\emph{à condition de ne pas sortir du terrain de jeu}.
+%
+%La flèche 
+
+\includegraphics[height=\baselineskip]{down} peut avoir 3
+effets différents :
+
+\begin{itemize}[leftmargin=5mm]
+\item Si la pince est vide et au-dessus d'un gobelet, elle
+  le saisit et remonte.
+\item Si la pince contient un gobelet, elle le d\'epose et remonte
+  \`a vide.
+\item Si la pince est vide et qu'il n'y a rien en dessous, rien ne se passe.
+\end{itemize}
+
+
+\includegraphics[height=\baselineskip]{rewind} et 
+\reflectbox{\includegraphics[height=\baselineskip]{rewind}} retournent le gobelet présent dans la pince si elle en contient un.
+\end{minipage}
+\hfill
+%
+%% Change program geometry HERE
+%
+\begin{tabular}{
+c@{~}
+*{10}{c@{
+\begin{tabular}[b]{c}
+\includegraphics[width=20mm]{graycond}\\
+\includegraphics[width=20mm]{gray}
+\end{tabular}
+%\hspace{1mm}
+}}
+}
+\includegraphics[width=20mm]{f0}
+&&&&&&&&&&\\[5mm]
+\includegraphics[width=20mm]{f1}
+&&&&&&&&&&\\[5mm]
+\includegraphics[width=20mm]{f2}
+&&&&&&&&&&\\[5mm]
+\includegraphics[width=20mm]{f3}
+&&&&&&&&&&\\[5mm]
+\end{tabular}
+\hfill
+\begin{minipage}{6cm}
+\vspace{-2mm}
+
+\subsection*{Programmes}
+
+\vspace{-0.2cm}
+
+Chaque programme (F0, F1, F2, F3) est constitué de 10 instructions au
+maximum.
+Il n'y a pas de \og retour à la ligne \fg{} automatique : une fois
+qu'un programme est fini, il ne se passe plus rien !
+
+
+
+Les instructions \includegraphics[height=\baselineskip]{f0},
+  \includegraphics[height=\baselineskip]{f1}... permettent
+d'\emph{appeler} un programme : on quitte (temporairement) le programme
+en cours, on exécute celui désigné par cette instruction, puis on
+revient au programme de départ s'il n'était pas fini.
+
+\vspace{-0.2cm}
+
+\subsection*{\'Etiquettes
+  \includegraphics[height=.5\baselineskip]{red}
+ \includegraphics[height=.5\baselineskip]{yellow} 
+\includegraphics[height=.5\baselineskip]{green}
+ \includegraphics[height=.5\baselineskip]{blue}
+}
+\vspace{-0.2cm}
+
+%Elles ne sont disponibles que dans les problèmes plus avancés.
+On les
+place au-dessus d'une instruction, et cette instruction ne s'effectue
+que si la pince contient un gobelet de la bonne couleur.
+% ( \includegraphics[width =.5cm]{red}, \includegraphics[width
+%    =.5cm]{yellow}, \includegraphics[width =.5cm]{green},
+%  ou \includegraphics[width =.5cm]{blue}).
+
+L'\'etiquette
+  {\it toutes les couleurs} \includegraphics[height=.5\baselineskip]{any} effectue une instruction seulement si
+  la pince contient un gobelet%
+%(ind\'ependemment de sa couleur)
+, et
+  l'\'etiquette {\it vide} \includegraphics[height=.5\baselineskip]{none} n'ex\'ecute l'instruction que si la pince est
+  vide.
+
+
+\vspace{3mm}
+\includegraphics[height=10mm]{logo_IREM_UGA_transitoire}
+\hfill
+\includegraphics[height=10mm]{logo-universite-grenoble-alpes}
+%\vspace{2mm}
+
+\includegraphics[height=10mm]{inria}%NRIA_CORPO_CMJN}
+\hfill
+\includegraphics[height=10mm]{logo_MPLSblanc}
+\end{minipage}
+
+\vfill
+
+%% Change available instructions HERE
+
+\begin{tabular}{
+*{4}{|c@{\includegraphics[width=20mm]{left}}}
+*{4}{|c@{\includegraphics[width=20mm]{right}}}
+*{3}{|c@{\includegraphics[width=20mm]{down}}}
+*{2}{|c@{\includegraphics[width=20mm]{rewind}}}
+*{2}{|c@{\reflectbox{\includegraphics[width=20mm]{rewind}}}}
+*{1}{|c@{\includegraphics[width=20mm]{f0}}}
+*{1}{|c@{\includegraphics[width=20mm]{f1}}}
+*{1}{|c@{\includegraphics[width=20mm]{f2}}}
+*{1}{|c@{\includegraphics[width=20mm]{f3}}}
+}
+\hline
+&&&&&&&&&&&&&&&&&&\\
+\hline
+&&&&&&&&&&&&&&&&&&\\[-.3mm]
+\end{tabular}
+
+\begin{tabular}{
+*{3}{|c@{\includegraphics[width=20mm]{yellow}}}
+*{3}{|c@{\includegraphics[width=20mm]{green}}}
+*{3}{|c@{\includegraphics[width=20mm]{red}}}
+*{3}{|c@{\includegraphics[width=20mm]{blue}}}
+*{3}{|c@{\includegraphics[width=20mm]{none}}}
+*{4}{|c@{\includegraphics[width=20mm]{any}}}
+}
+\hline
+&&&&&&&&&&&&&&&&&&\\
+\hline
+\end{tabular}
+
+
+\end{document}

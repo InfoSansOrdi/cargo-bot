@@ -1,0 +1,437 @@
+\documentclass[a4paper,12pt,fleqn]{article}
+%%%%% langues
+\usepackage[french]{babel}
+
+%\usepackage{bibtopic}
+%\usepackage{bibunits}
+\usepackage{harvard}
+
+\def\ftoday{\number\day\space
+ \ifcase\month\or
+janvier\or f{\'e}vrier\or mars\or avril\or mai\or juin\or
+ juillet\or ao{\^u}t\or septembre\or octobre\or novembre\or d{\'e}cembre\fi
+ \space\number\year}
+
+
+%%%%% format de page 
+ \setlength{\textwidth }{16cm} 
+ \setlength{\oddsidemargin}{0cm} 
+ \setlength{\evensidemargin}{0cm} 
+ \setlength{\topmargin}{-1cm} 
+ \setlength{\headheight}{1cm} 
+ \setlength{\headsep}{0.5cm} 
+ \setlength{\textheight}{24cm}
+ 
+
+%\usepackage{draftwatermark}
+%\SetWatermarkText{Document de travail}
+%\SetWatermarkLightness{1}
+%\SetWatermarkScale{0.5}
+
+%%%%% Style de page
+\newcommand\algorithme{
+%Activit\'e Informatique \& Math\'ematique
+\textit{Cargo-bot}}
+\newcommand\site{}
+\newcommand\etablissement{Universit{\'e} Joseph Fourier}
+\newcommand\jour{version du \ftoday}
+\usepackage{my-page}
+\pagestyle{myheadings}
+
+%%%%% fontes 
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{times}
+
+
+%%%%% algorithmes
+\usepackage[french,vlined]{algorithm2e}
+
+\SetKw{KwDownTo}{downto}
+\SetKwIF{If}{ElseIf}{Else}{if}{}{else if}{else}{endif}
+\SetKwFor{For}{for}{}{endfor}
+\SetKwFor{While}{while}{}{endw}%
+
+\SetKwInput{KwIn}{Entrée}%
+\SetKwInput{KwOut}{Sortie}%
+\SetKwInput{KwData}{Données}%
+\SetKwInput{KwResult}{Résultat}%
+
+
+
+ 
+ %%%%% boites
+\usepackage{psboxit}
+\usepackage{fancybox}
+
+%%%%% graphiques
+\usepackage{pstricks,pst-plot,pst-text,pst-tree,pst-eps,pst-fill,pst-node,pst-math}
+
+\usepackage{xcolor}
+\usepackage{colortbl}
+\usepackage{graphics}%
+\usepackage{figlatex}%
+
+\definecolor{gris05}{gray}{0.95}
+
+\graphicspath{{Fichiers/Planche//}}
+
+%\usepackage{pgfplots}
+
+
+%%%%% hyperliens
+\usepackage{hyperref,url}
+\hypersetup{
+dvips,
+backref=true, %permet d'ajouter des liens dans...
+pagebackref=true,%...les bibliographies
+hyperindex=true, %ajoute des liens dans les index.
+colorlinks=true, %colorise les liens
+breaklinks=true, %permet le retour à la ligne dans les liens trop longs
+urlcolor= blue, %couleur des hyperliens
+linkcolor= blue, %couleur des liens internes
+bookmarks=true, %créé des signets pour Acrobat
+bookmarksopen=true} 
+
+%%%%%%%%% Listings
+% Default fixed font does not support bold face
+\DeclareFixedFont{\ttb}{T1}{txtt}{bx}{n}{12} % for bold
+\DeclareFixedFont{\ttm}{T1}{txtt}{m}{n}{12}  % for normal
+
+% Custom colors
+\usepackage{color}
+\definecolor{deepblue}{rgb}{0,0,0.5}
+\definecolor{deepred}{rgb}{0.6,0,0}
+\definecolor{deepgreen}{rgb}{0,0.5,0}
+
+\usepackage{listings}
+
+% Python style for highlighting
+\newcommand\pythonstyle{\lstset{
+language=Python,
+basicstyle=\ttm,
+otherkeywords={self},             % Add keywords here
+keywordstyle=\ttb\color{deepblue},
+emph={MyClass,__init__},          % Custom highlighting
+emphstyle=\ttb\color{deepred},    % Custom highlighting style
+stringstyle=\color{deepgreen},
+frame=tb,                         % Any extra options here
+showstringspaces=false            % 
+}}
+
+
+% Python environment
+\lstnewenvironment{python}[1][]
+{
+\pythonstyle
+\lstset{#1}
+}
+{}
+
+% Python for external files
+\newcommand\pythonexternal[1]{{
+\pythonstyle
+\lstinputlisting{#1}}}
+
+% Python for inline
+\newcommand\pythoninline[1]{{\pythonstyle\lstinline!#1!}}
+
+
+
+%%%%% mathématiques
+\usepackage{amsmath,amsfonts,amssymb,newlfont,latexsym}
+
+% symboles
+ \def\real{\mathbb{R}}
+ \def\integer{\mathbb{N}}
+ \def\relative{\mathbb{Z}}
+ \def\Prob{\mathbb{P}}
+ \def\Esp{\mathbb{E}}
+ \def\1{\large{1\!\!1}}
+
+\def\leq{\leqslant}%
+\def\geq{\geqslant}%
+ 
+ % expressions
+ \def\limn{\lim_{ n \to +\infty}}
+ \def\limt{\lim_{t \to +\infty}}
+
+  % environnements
+ \newtheorem{defi}{D{\'e}finition}
+ \newtheorem{lemm}{Lemme}
+ \newtheorem{prop}{Proposition}
+ \newtheorem{coro}{Corollaire}
+ \newtheorem{theo}{Th{\'e}or{\`e}me}
+ \newtheorem{conj}{Conjecture}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{float}
+ 
+ 
+ 
+ % Definition generale des cadres
+\newlength {\largeur}
+\addtolength {\largeur}{\textwidth}
+\addtolength {\largeur}{-4em}
+
+\newenvironment{cadre}[1]%
+  {% 
+
+    \ \\
+    \indent
+    \begin{Sbox}%
+      \begin{minipage}{\largeur}%
+        \vspace{-0.5em}
+        \hspace{-2ex}
+        \colorbox{white}{\strut{\color{black}{\large \bf #1}\ \ }}\\
+        \vspace{-0.7em}\ \\
+        %\it
+%        \vspace{-1.5em}\ \\
+%        \colorbox{white}{\strut{\color{black}\ \ {\bf #1}\ \ }}\\
+  }
+  {\end{minipage}\end{Sbox}
+\fboxsep 1em
+\fbox{\TheSbox}\vspace{0em}\\
+\fboxsep 0em
+}
+
+%\floatstyle{ruled}
+\newfloat{my-algo}{thp}{lop}
+\floatname{my-algo}{Algorithme}
+
+\newcounter{cpt-question}
+\newenvironment{question}[1]{\begin{description}\item [Question] 
+                      \textbf{\addtocounter{cpt-question}{1}\arabic{cpt-question}}  #1
+                      }{\end{description}}  
+\setcounter{cpt-question}{0}  
+           
+\begin{document}
+\thispagestyle{empty}
+
+\vspace{-2cm}
+\noindent
+{\Large {Sciences Manuelles du Numérique \textit{Cargo-bot}}
+}\hfill %\includegraphics[width=1cm]{logos/isi2.jpg}
+
+\noindent \hrulefill
+
+\noindent
+\textbf{}\\
+\noindent
+Auteur : Benjamin.Wack@imag.fr\\
+\noindent
+\href{http://www.univ-grenoble-alpes.fr/}{Université Grenoble Alpes},
+% \href{http://ufrima.imag.fr/}{UFR IM$^\text{2}$AG},  
+%\href{http://www.inria.fr/}{Inria Rhône-Alpes}, 
+\href{http://www-irem.ujf-grenoble.fr/}{IREM-Grenoble}
+
+\subsection*{Préambule}
+%\noindent
+Lorsqu'on a trouvé une solution à un problème de Cargo-bot, on a écrit un
+\emph{algorithme} pour le résoudre : une méthode qui marche à tous les
+coups pour arriver au résultat voulu. La grue n'a alors plus qu'à
+\emph{exécuter} cet algorithme, c'est-à-dire faire exactement ce qu'on
+lui dit. En revanche, elle n'a pas besoin de \og comprendre \fg{} ce
+qu'elle fait pour le faire correctement, ni de savoir à quoi va
+ressembler le résultat final.
+
+
+\medskip
+%\noindent
+Le cadre dans lequel on écrit ces algorithmes est relativement
+contraint :
+\begin{itemize}
+\item très peu d'instructions élémentaires (aussi appelées \emph{primitives}) ;
+\item la place allouée à l'écriture des programmes est restreinte
+\end{itemize}
+ce qui force à rechercher une certaine concision dans l'écriture des
+algorithmes.
+
+\medskip
+%\noindent
+De plus, plusieurs solutions distinctes sont parfois possibles ; se
+pose alors la question des critères pour les comparer. Le format des
+problèmes tend à valoriser les solutions courtes, mais on pourra aussi
+discuter de la lisibilité des programmes produits.
+
+\section*{Un ou plusieurs programmes}
+
+Une particularité dans Cargo-Bot, c'est qu'on écrit non pas un mais
+quatre programmes, qui peuvent ensuite s'\emph{appeler} les uns les
+autres. Cela permet de regrouper dans un programme une suite
+d'instructions particulière (par exemple qui déplace un gobelet d'un cran
+vers la droite), puis d'appeler ce programme plusieurs fois (pour
+déplacer plusieurs gobelets). On crée ainsi une sorte de boucle.
+
+\medskip
+%\noindent
+
+Un programme conçu de cette façon sera d'autant plus facile à
+comprendre et à modifier que chaque petit programme est prévu pour
+résoudre une tâche particulière bien définie.
+
+Avec un peu d'habitude, on peut même s'appuyer sur ce mécanisme pour
+construire ses programmes, par ce qu'on appelle l'\emph{analyse
+descendante}. On découpe le problème à résoudre en sous-problèmes,
+et on cherche à écrire un morceau de programme 
+résolvant chacun des sous-problèmes. Les sous-programmes les plus
+souvent utilisés sont nommés pour pouvoir être appelés plusieurs fois
+; on peut même utiliser leur nom dans un autre programme avant de les
+avoir réellement écrits !
+
+%% \paragraph{Questions :} Comment \og découper \fg ses programmes de
+%% façon adaptée ? Ce mécanisme peut-il remplacer complètement les
+%% boucles ? A-t-il d'autres utilités ?
+
+\section*{Récursivité}
+
+Si on veut déplacer toute une pile de gobelets vers la droite, au lieu de
+r\'ep\'eter plusieurs fois l'appel à un programme, il est plus
+\'economique d'\'ecrire un programme qui signifie
+\og Déplace un gobelet vers la droite et recommence \fg{}. De plus ce
+programme fonctionnera quelle que soit la taille de la pile à
+déplacer. C'est possible si on écrit un programme qui s'appelle lui-m\^eme.
+
+En toute généralité, il est possible de remplacer complètement la
+structure de boucle algorithmique par ce mécanisme de programme
+auto-appelant. Cela donne des langages de programmation assez
+surprenants, dits \emph{fonctionnels}, dans lequel l'écriture d'un
+programme ressemble à la définition d'une suite récurrente en mathématiques.
+
+\medskip
+%\noindent
+
+Au premier abord, devant un tel programme, on se demande souvent s'il
+va s'arrêter, puisqu'il se relance lui-même. Même au sein de la
+communauté scientifique informatique, il a fallu un certain nombre de
+travaux avant que tout le monde soit convaincu que cette manière de
+procéder était correcte. En réalité, il est très fréquent d'obtenir
+un programme infini si on ne prend pas suffisamment de précautions,
+mais c'est déjà le cas avec les boucles.
+
+Dans Cargo-Bot, la situation est un peu biaisée : en effet, la grue
+s'arrête dès qu'on arrive dans une configuration gagnante. Il y a donc une
+\og boucle d'exécution \fg implicite, qui teste systématiquement si le
+but est atteint. C'est également le cas lorsqu'on fait de la
+\emph{programmation événementielle} comme en Scratch, où beaucoup de
+conditions (appui sur une touche, collision entre objets...) sont
+implicitement testées à intervalles réguliers.
+
+\section*{Des primitives}
+
+Au fur et à mesure des problèmes, l'ensemble des primitives proposées
+évolue : manipulation de la grue, appels de sous-programmes,
+instructions conditionnelles... 
+
+De manière générale, lorsqu'on programme une machine, le jeu
+d'instructions dont on dispose correspond aux actions qu'est capable
+de réaliser physiquement la machine. Cependant, afin de faciliter la
+tâche du programmeur, ces instructions sont représentées par des
+\emph{symboles}, suffisamment clairs pour être compris par un humain
+avec un peu d'apprentissage, mais choisis rigoureusement pour que la
+machine puisse ensuite les traduire en actions sans ambiguïté. Tout
+symbole inexistant dans le langage, ou toute utilisation inadaptée
+d'un symbole, conduira à un refus de la machine de fonctionner.
+
+Cette contrainte dans l'écriture des programmes semble parfois pénible
+lorsqu'on apprend à programmer, mais elle est indispensable : le
+programmeur a besoin de savoir comment la machine va se comporter, ce
+qui ne serait pas possible si on lui laissait la moindre liberté
+d'interprétation.
+
+\medskip
+
+Parmi ces symboles, on pourra distinguer ceux qui correspondent à des
+actions élémentaires (déplacement de la grue), et d'autre part ceux
+qui permettent de moduler ou de combiner entre elles d'autres
+instructions. Ainsi, un programme formé d'une étiquette conditionnelle
+seule n'a pas de sens, elle doit obligatoirement être associée à une
+instruction.
+
+De plus, on combine également des instructions en les
+écrivant l'une à la suite de l'autre dans l'ordre où elles doivent
+s'exécuter ; ce type d'enchaînement est souvent implicitement
+représenté par un alignement vertical ou horizontal dans les
+langages de programmation, par économie d'écriture.
+
+Plus on veut écrire des algorithmes complexes dans Cargo-Bot, plus on
+introduit des instructions proches de celles des langages de programmation.
+
+%% \paragraph{Questions :} Quelles primitives sont réellement nécessaires
+%% pour écrire des algorithmes ? Et après tout, qu'est-ce qu'un
+%% algorithme ?
+
+\newpage
+\section*{Notion d'état et de mémoire}
+
+Dans Cargo-Bot, l'objet sur lequel agit le programme est la position
+des gobelets à un moment donné.
+Plus généralement, on ne devrait pas dire qu'un programme \og fait
+quelque chose \fg quand on l'exécute, mais qu'il \og transforme quelque
+chose \fg. En général, c'est sur la mémoire d'un ordinateur qu'il
+agit, mais pas seulement : les programmes peuvent aussi commander des
+périphériques, des actionneurs électroniques, des mécanismes robotisés...
+
+\medskip
+
+Est-il vraiment différent de manipuler des gobelets ou des nombres
+dans une mémoire ? Pour l'écriture du programme, pas tellement :
+l'important reste de déterminer une suite d'instructions qui nous
+permettra de passer d'un état initial à un état final via un certain
+nombre de transitions élémentaires.
+
+Mais si on pense plutôt au type de calculs que pourront effectuer nos
+programmes, alors la différence est claire : dans une mémoire
+d'ordinateur, il est toujours possible de dupliquer et d'effacer des
+informations, alors que bien sûr le nombre de gobelets présents sur le
+terrain de jeu ne peut pas changer au cours des manipulations. Pour
+autant, il reste possible de représenter des opérations simples (par
+exemple une addition sous la forme de deux piles de gobelets qu'on
+rassemblera en une seule), mais cela reste fastidieux et limité.
+
+
+\section*{À propos de langages de programmation}
+
+Il existe des milliers de langages de programmation, chacun avec ses
+spécificités. Selon le programme qu'on souhaite écrire, il pourra être
+facile de l'écrire dans certains langages, et plus difficile dans
+d'autres. Cependant, il est intéressant de noter deux caractéristiques
+importantes :
+\begin{itemize}
+\item Tous les langages de programmation permettent d'écrire tous les
+  algorithmes possibles. Parfois il sera très compliqué, voire
+  infaisable en pratique, de traduire un programme d'un langage dans
+  un autre, mais en théorie c'est toujours possible.
+\item La plupart des langages offrent les mêmes instructions 
+  pour combiner les instructions entre elles : séquence, instruction
+  conditionnelle, boucle.
+\end{itemize}
+
+Ainsi, une fois qu'on connaît un ou deux langages de programmation, il
+devient nettement plus facile d'en apprendre d'autres, car on retrouve
+facilement des structures communes.
+
+En revanche, pour vraiment utiliser correctement un langage donné, il
+faut bien connaître la partie qui lui est spécifique : les
+bibliothèques disponibles, les structures de données représentables, les
+facilités de manipulation de ces structures de données... et cela peut
+demander un apprentissage conséquent.
+
+\paragraph*{Remerciements}
+
+Cargo-Bot est un jeu de Rui Viana, et une marque réservée de Two
+    Lives Left, utilisée ici avec leur aimable autorisation.
+
+Adaptation originale en Javascript par Joe Tessler.
+
+Merci au groupe Informatique Sans Ordinateur de l'IREM de
+Clermont-Ferrand pour les échanges fructueux et leurs apports à
+l'élaboration de cette activité.
+
+%\bibliographystyle{agsm}
+%\bibliography{Ouvrages} 
+\label{fin-document}
+
+
+
+
+\end{document}

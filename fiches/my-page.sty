@@ -1,0 +1,22 @@
+
+\def\ps@myheadings{
+\def\@oddheadline{\begin{minipage}{\textwidth}{
+\textbf{\Large \algorithme} \hfill
+\includegraphics[height=10mm]{logo_IREM_UGA_transitoire}
+\includegraphics[height=10mm]{inria}
+%\includegraphics[height=10mm]{logo-universite-grenoble-alpes}
+\includegraphics[height=10mm]{logo_MPLSblanc}\\
+\hrulefill
+}
+\end{minipage}
+}
+\def\@oddhead{\protect \@oddheadline}
+\def\@evenhead{\protect \@oddheadline}
+\def\@oddfoot{\begin{minipage}{\textwidth}{
+\hrulefill \\
+\mbox{\site}
+\hfill \mbox{\jour} 
+    \hfill \mbox{\textbf\thepage / \pageref{fin-document}}}
+\end{minipage}
+ }
+}
